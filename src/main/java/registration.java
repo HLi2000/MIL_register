@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
+
 
 public class registration extends JFrame{
 
@@ -22,7 +22,6 @@ public class registration extends JFrame{
     Color panel_color = new Color(54, 54, 54);
     Color message_color = new Color(238, 130, 130);
     Font f_1 = new Font(Font.DIALOG, Font.PLAIN, 11);
-
 
     public registration() {
         super("Registration");
@@ -88,14 +87,21 @@ public class registration extends JFrame{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 User regist = new User();
+                String username_s = username.getText();
                 char[] pa = password.getPassword();
                 String pa_s = String.valueOf(pa);
-                regist.getUsername(username.getText());
-                regist.getUsername(pa_s);
+                regist.setUsername(username_s);
+                regist.setPassword(pa_s);
                 regist.hashcode();
                 Client reg_cl = new Client();
+                try{
+                    reg_cl.register(regist);
+                    setVisible(false);}
+                    catch (Exception e){
+                    System.out.println("failed to regist");
+                }
 
-                if (username.getText().equals("123") ) {
+                /*if (username.getText().equals("123") ) {
                     try{
                     reg_cl.register(regist);
                     setVisible(false);}
@@ -120,7 +126,7 @@ public class registration extends JFrame{
                     messagepanel.add(error_message_2);
                     add(messagepanel);
                     setVisible(true);
-                }
+                }*/
             }
         });
     }
