@@ -2,6 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class registration extends JFrame{
 
@@ -73,7 +74,7 @@ public class registration extends JFrame{
         loop();
     }
 
-    public void loop() {
+    public void loop()  {
         cancelbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -82,16 +83,25 @@ public class registration extends JFrame{
             }
         });
 
+
         confirmbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                User regist = new User();
                 char[] pa = password.getPassword();
                 String pa_s = String.valueOf(pa);
+                regist.getUsername(username.getText());
+                regist.getUsername(pa_s);
+                regist.hashcode();
+                Client reg_cl = new Client();
 
-                //check username
-                if (username.getText().equals("123") && pa_s.equals("123")) {
-                    login_status = true;
-                    setVisible(false);
+                if (username.getText().equals("123") ) {
+                    try{
+                    reg_cl.register(regist);
+                    setVisible(false);}
+                    catch (Exception e){
+                        System.out.println("failed to regist");
+                    }
                 } else {
                     //show the error message
                     JPanel messagepanel = new JPanel();
