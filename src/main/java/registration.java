@@ -96,7 +96,24 @@ public class registration extends JFrame{
                 Client reg_cl = new Client();
                 try{
                     reg_cl.register(regist);
-                    setVisible(false);}
+                    JPanel messagepanel_suc = new JPanel();
+                    messagepanel_suc.setBounds(0, 250, 350, 50);
+                    messagepanel_suc.setBackground(panel_color);
+                    JLabel succ_message = new JLabel("Registration success");
+                    //JLabel error_message_2 = new JLabel("please choose another one");
+                    Font f = new Font(Font.DIALOG, Font.BOLD, 12);
+                    succ_message.setFont(f);
+                    succ_message.setForeground(message_color);
+                    succ_message.setBounds(70,10,100,10);
+                    //error_message_2.setBounds(60,40,100,10);
+                    //error_message_2.setFont(f);
+                    //error_message_2.setForeground(message_color);
+                    messagepanel_suc.add(succ_message);
+                    //messagepanel_suc.add(error_message_2);
+                    add(messagepanel_suc);
+                    setVisible(true);
+                    //setVisible(false);
+                    }
                     catch (Exception e){
                     System.out.println("failed to regist");
                 }
