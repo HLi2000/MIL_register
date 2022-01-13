@@ -4,7 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Entities.*;
-
+/**
+ * The Regiater is used to allow administer to register new user to the account data base
+ *
+ * @author  Shiyu Wang
+ * @since   2022-01-03
+ */
 
 public class Register extends JFrame{
 
@@ -13,8 +18,9 @@ public class Register extends JFrame{
     JLabel a1 = new JLabel("Username");
     JLabel a2 = new JLabel("Password");
 
-    JButton confirmbtn = new JButton("confirm");
+    JButton confirmbtn = new JButton("register");
     JButton cancelbtn = new JButton("clear");
+    JButton deletebtn = new JButton("delete");
     ImageIcon logo = new ImageIcon("img/whiteLogo.png");
     JLabel logo_label = new JLabel(logo);
     public boolean login_status = false;
@@ -67,10 +73,12 @@ public class Register extends JFrame{
         fieldPanel.add(password);
         add(fieldPanel);
 
-        confirmbtn.setBounds(75, 190, 75, 25);
-        cancelbtn.setBounds(190, 190, 75, 25);
+        confirmbtn.setBounds(30, 190, 75, 25);
+        cancelbtn.setBounds(130, 190, 75, 25);
+        deletebtn.setBounds(230,190,75,25);
         fieldPanel.add(confirmbtn);
         fieldPanel.add(cancelbtn);
+        fieldPanel.add(deletebtn);
         add(fieldPanel);
         loop();
     }
@@ -98,8 +106,8 @@ public class Register extends JFrame{
                 Client reg_cl = new Client();
 
                 String[] result = {null};
-                try{
-                    //reg_cl.register(regist);
+                try {
+
                     JPanel messagepanel_suc = new JPanel();
                     messagepanel_suc.setBounds(0, 250, 350, 50);
                     messagepanel_suc.setBackground(panel_color);
@@ -108,58 +116,69 @@ public class Register extends JFrame{
                     Font f = new Font(Font.DIALOG, Font.BOLD, 12);
                     succ_message.setFont(f);
                     succ_message.setForeground(message_color);
-                    succ_message.setBounds(70,10,100,10);
+                    succ_message.setBounds(70, 10, 100, 10);
                     messagepanel_suc.add(succ_message);
                     add(messagepanel_suc);
                     messagepanel_suc.repaint();
                     setVisible(true);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("failed to regist");
                 }
-
-                /*if (username.getText().equals("123") ) {
-                    try{
-                    reg_cl.register(regist);
-                    setVisible(false);}
-                    catch (Exception e){
-                        System.out.println("failed to regist");
-                    }
-                } else {
-                    //show the error message
-                    JPanel messagepanel = new JPanel();
-                    messagepanel.setBounds(0, 250, 350, 50);
-                    messagepanel.setBackground(panel_color);
-                    JLabel error_message_1 = new JLabel("This username is already registered, ");
-                    JLabel error_message_2 = new JLabel("please choose another one");
-                    Font f = new Font(Font.DIALOG, Font.BOLD, 12);
-                    error_message_1.setFont(f);
-                    error_message_1.setForeground(message_color);
-                    error_message_1.setBounds(70,10,100,10);
-                    error_message_2.setBounds(60,40,100,10);
-                    error_message_2.setFont(f);
-                    error_message_2.setForeground(message_color);
-                    messagepanel.add(error_message_1);
-                    messagepanel.add(error_message_2);
-                    add(messagepanel);
-                    setVisible(true);
-                }*/
             }
         });
-    }
-    public static void main(String[] args) {
+                deletebtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        User regist_delete = new User();
+                        char[] pa = password.getPassword();
+                        String pa_delete = String.valueOf(pa);
+                        regist_delete.setPassword(pa_delete);
+                        String username_delete = username.getText();
+                        regist_delete.setUsername(username_delete);
+                        regist_delete.hashcode();
+                        Client reg_cl = new Client();
+                        try {
+                            reg_cl.delete(regist_delete);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        String[] result = {null};
+                        try {
+                            JPanel messagepanel_suc = new JPanel();
+                            messagepanel_suc.setBounds(0, 250, 350, 50);
+                            messagepanel_suc.setBackground(panel_color);
+                            result[0] = reg_cl.delete(regist_delete);
+                            JLabel succ_message = new JLabel(result[0]);
+                            Font f = new Font(Font.DIALOG, Font.BOLD, 12);
+                            succ_message.setFont(f);
+                            succ_message.setForeground(message_color);
+                            succ_message.setBounds(70, 10, 100, 10);
+                            messagepanel_suc.add(succ_message);
+                            add(messagepanel_suc);
+                            messagepanel_suc.repaint();
+                            setVisible(true);
+                        } catch (Exception e) {
+                            System.out.println("failed to regist");
+                        }
 
+                    }
+                });
+            }
+    public static void main(String[] args) throws Exception {
+
+        //skin
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         }catch(Exception e) {
             System.out.println(e);
         }
-        new Register();
-    }
 
-}
+        new Register();
+
+    }
+        }
