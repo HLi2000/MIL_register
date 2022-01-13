@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class registration extends JFrame{
+public class Register extends JFrame{
 
     private JTextField username = new JTextField();
     private JPasswordField password = new JPasswordField();
@@ -23,8 +23,8 @@ public class registration extends JFrame{
     Color message_color = new Color(238, 130, 130);
     Font f_1 = new Font(Font.DIALOG, Font.PLAIN, 11);
 
-    public registration() {
-        super("Registration");
+    public Register() {
+        super("Register");
         Container c = getContentPane();
         setBounds(600, 200, 350, 400);
         setResizable(false);
@@ -97,7 +97,7 @@ public class registration extends JFrame{
 
                 String[] result = {null};
                 try{
-                    reg_cl.register(regist);
+                    //reg_cl.register(regist);
                     JPanel messagepanel_suc = new JPanel();
                     messagepanel_suc.setBounds(0, 250, 350, 50);
                     messagepanel_suc.setBackground(panel_color);
@@ -111,8 +111,8 @@ public class registration extends JFrame{
                     add(messagepanel_suc);
                     messagepanel_suc.repaint();
                     setVisible(true);
-                    }
-                    catch (Exception e){
+                }
+                catch (Exception e){
                     System.out.println("failed to regist");
                 }
 
@@ -157,7 +157,7 @@ public class registration extends JFrame{
         }catch(Exception e) {
             System.out.println(e);
         }
-        new registration();
+        new Register();
     }
 
 }
