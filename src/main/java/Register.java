@@ -4,7 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Entities.*;
-
+/**
+ * The Regiater is used to allow administer to register new user to the account data base
+ *
+ * @author  Shiyu Wang
+ * @since   2022-01-03
+ */
 
 public class Register extends JFrame{
 
