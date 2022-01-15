@@ -89,6 +89,10 @@ public class Register extends JFrame{
         loop();
     }
 
+    /**
+     * User can see different messages on the frame: For register : "Username Already Exists" "Registered Successfully"
+     * For Delete :"Delete Successfully"
+     */
     public void loop()  {
         cancelbtn.addActionListener(new ActionListener() {
             @Override
@@ -102,22 +106,23 @@ public class Register extends JFrame{
         confirmbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                User regist = new User();
+                User register = new User();
                 String username_s = username.getText();
                 char[] pa = password.getPassword();
                 String pa_s = String.valueOf(pa);
-                regist.setUsername(username_s);
-                regist.setPassword(pa_s);
-                regist.hashcode();
+                register.setUsername(username_s);
+                register.setPassword(pa_s);
+                register.hashcode();
                 Client reg_cl = new Client();
 
                 String[] result = {null};
+
                 try {
 
                     JPanel messagepanel_suc = new JPanel();
                     messagepanel_suc.setBounds(0, 250, 350, 50);
                     messagepanel_suc.setBackground(panel_color);
-                    result[0] = reg_cl.register(regist);
+                    result[0] = reg_cl.register(register);
                     JLabel succ_message = new JLabel(result[0]);
                     Font f = new Font(Font.DIALOG, Font.BOLD, 12);
                     succ_message.setFont(f);
@@ -164,7 +169,7 @@ public class Register extends JFrame{
                             messagepanel_suc.repaint();
                             setVisible(true);
                         } catch (Exception e) {
-                            System.out.println("failed to regist");
+                            System.out.println("failed to register");
                         }
 
                     }
