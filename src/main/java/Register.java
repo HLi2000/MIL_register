@@ -31,6 +31,12 @@ public class Register extends JFrame{
     Color message_color = new Color(238, 130, 130);
     Font f_1 = new Font(Font.DIALOG, Font.PLAIN, 11);
 
+
+    /**
+     * User will have three options on this frame: register a new account,
+     * clear all the textfiled and delete the existing account
+     */
+
     public Register() {
         super("Register");
         Container c = getContentPane();
